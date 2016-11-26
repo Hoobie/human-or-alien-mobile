@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { NavController } from 'ionic-angular';
+import { FileChooser } from 'ionic-native';
 
 @Component({
   selector: 'page-home',
@@ -8,26 +10,47 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  src: any;
+  imgReady: boolean = false;
+  humanFound: boolean = false;
+
+  constructor(public navCtrl: NavController, public changeDetector: ChangeDetectorRef,
+    public domSanitizer: DomSanitizer) {
   }
 
-  ionViewDidLoad() {
-    var img = document.getElementById('img');
-
-    img.onload = function() {
-      var tracker = new tracking.ObjectTracker(['face', 'eye', 'mouth']);
-      tracker.setStepSize(1.7);
-      tracking.track('#img', tracker);
-
-      tracker.on('track', function(event) {
-        event.data.forEach(function(rect) {
-          HomePage.plot(rect.x, rect.y, rect.width, rect.height);
-        });
-      });
+  loadImage() {
+    var rects = document.getElementsByClassName('rect');
+    while (rects[0]) {
+      rects[0].parentNode.removeChild(rects[0])
     }
+
+    this.imgReady = false;
+    this.humanFound = false;
+    FileChooser.open()
+      .then(uri => {
+        let safeUrl = this.domSanitizer.bypassSecurityTrustUrl(uri);
+        this.imgReady = true;
+        this.src = safeUrl;
+      })
+      .catch(e => console.log(e));
   }
 
-  static plot(x, y, w, h) {
+  humanOrAlien() {
+    var tracker = new tracking.ObjectTracker(['face', 'eye', 'mouth']);
+    tracker.setStepSize(1.7);
+    tracking.track('#img', tracker);
+
+    var t = this;
+
+    tracker.on('track', function(event) {
+      event.data.forEach(function(rect) {
+        t.plot(rect.x, rect.y, rect.width, rect.height);
+        t.humanFound = true;
+      });
+    });
+  }
+
+  plot(x, y, w, h) {
     var img = document.getElementById('img');
 
     var rect = document.createElement('div');

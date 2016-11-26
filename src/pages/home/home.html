@@ -1,12 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Human or alien</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
+  <button ion-button full (click)="loadImage()">Load image</button>
   <div class="demo-container">
-    <img id="img" src="assets/faces.jpg" />
+    <img id="img" *ngIf="imgReady" [src]="src" />
   </div>
+  <button ion-button full *ngIf="imgReady" (click)="humanOrAlien()">Human or alien?</button>
+  <h2 class="animated pulse infinite" *ngIf="humanFound" style="text-align:center">Human</h2>
 </ion-content>

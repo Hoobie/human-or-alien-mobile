@@ -13,6 +13,8 @@
 */
 declare module '*';
 
+declare var cordova: any;
+
 declare namespace tracking {
   class ObjectTracker {
     constructor(opt_classifiers: Array<string>);

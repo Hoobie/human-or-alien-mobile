@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.humanoralienmobile420429" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>human-or-alien-mobile</name>
   <description>An awesome Ionic/Cordova app.</description>
@@ -28,4 +28,6 @@
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
+  <allow-navigation href="*"/>
+  <plugin name="com.megster.cordova.FileChooser" spec="http://github.com/don/cordova-filechooser.git"/>
 </widget>
