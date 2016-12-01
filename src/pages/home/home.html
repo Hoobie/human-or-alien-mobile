@@ -7,8 +7,8 @@
 <ion-content padding>
   <button ion-button full (click)="loadImage()">Load image</button>
   <div class="demo-container">
-    <img id="img" *ngIf="imgReady" [src]="src" />
+    <img id="img" [src]="src" />
   </div>
-  <button ion-button full *ngIf="imgReady" (click)="humanOrAlien()">Human or alien?</button>
+  <button ion-button full (click)="humanOrAlien()">Human or alien?</button>
   <h2 class="animated pulse infinite" *ngIf="humanFound" style="text-align:center">Human</h2>
 </ion-content>
