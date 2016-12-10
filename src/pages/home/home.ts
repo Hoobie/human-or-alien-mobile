@@ -11,7 +11,7 @@ import { FileChooser } from 'ionic-native';
 export class HomePage {
 
   static THRESHOLD: number = 3;
-  src: any = 'assets/example2.jpg';
+  src: any = 'assets/example1.jpg';
   found: string = null;
   objects = [];
   colors = [];
