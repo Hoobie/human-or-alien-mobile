@@ -16,13 +16,19 @@ declare module '*';
 declare var cordova: any;
 
 declare namespace tracking {
-  class ObjectTracker {
-    constructor(opt_classifiers: Array<string>);
-
-    setStepSize(size: number);
-
+  class Tracker {
     on(event: string, callback: (event) => void);
   }
 
-  function track(element: string, tracker: ObjectTracker): any;
+  class ObjectTracker extends Tracker {
+    constructor(classifiers: Array<string>);
+    setStepSize(step: number);
+  }
+
+  class ColorTracker extends Tracker {
+    constructor(classifiers: Array<string>);
+    static registerColor(color: string, fun: (r, g, b) => boolean);
+  }
+
+  function track(element: string, tracker: Tracker): any;
 }

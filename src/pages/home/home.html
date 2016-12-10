@@ -1,14 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Human or alien</ion-title>
+    <ion-title><h2>Human or alien</h2></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button full (click)="loadImage()">Load image</button>
-  <div class="demo-container">
-    <img id="img" *ngIf="imgReady" [src]="src" />
+  <div id="container">
+    <button ion-button round (click)="loadImage()">Load image</button>
+    <div class="img-container">
+      <img id="img" [src]="src" />
+    </div>
+    <button ion-button round (click)="humanOrAlien()">Human or alien?</button>
+    <h2 class="animated pulse infinite" *ngIf="found != null" style="text-align:center">{{found}}</h2>
   </div>
-  <button ion-button full *ngIf="imgReady" (click)="humanOrAlien()">Human or alien?</button>
-  <h2 class="animated pulse infinite" *ngIf="humanFound" style="text-align:center">Human</h2>
 </ion-content>

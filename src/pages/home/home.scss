@@ -1,11 +1,20 @@
 page-home {
+  h2 {
+    font-family: "Impact", Charcoal, sans-serifs;
+    color: green;
+  }
+
+  #container {
+    text-align: center;
+  }
+
   #img {
     margin: 0 auto;
     display: block;
   }
 
   .rect {
-    border: 2px solid #a64ceb;
+    border: 2px solid;
     left: -1000px;
     position: absolute;
     top: -1000px;
