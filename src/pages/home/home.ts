@@ -33,13 +33,8 @@ export class HomePage {
   }
 
   loadImage() {
-    var rects = document.getElementsByClassName('rect');
-    while (rects[0]) {
-      rects[0].parentNode.removeChild(rects[0])
-    }
+    this.clear();
 
-    this.found = null;
-    this.objects = [];
     FileChooser.open()
       .then(uri => {
         let safeUrl = this.domSanitizer.bypassSecurityTrustUrl(uri);
@@ -49,6 +44,8 @@ export class HomePage {
   }
 
   humanOrAlien() {
+    this.clear();
+
     var objectTracker = new tracking.ObjectTracker(['eye', 'mouth']);
     objectTracker.setStepSize(1.1);
     var t = this;
@@ -90,6 +87,16 @@ export class HomePage {
 
     tracking.track('#img', objectTracker);
     tracking.track('#img', colorTracker);
+  }
+
+  clear() {
+    var rects = document.getElementsByClassName('rect');
+    while (rects[0]) {
+      rects[0].parentNode.removeChild(rects[0])
+    }
+
+    this.found = null;
+    this.objects = [];
   }
 
   static doesObjectIntersectWithColor(obj, col) {
